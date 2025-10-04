@@ -9,9 +9,6 @@ import { random } from "./utility";
 const app = express();
 app.use(express.json());
 
-const JWT_SECRET = process.env.JWT_SECRET as string;
-
-// --------------------routes----------------------------
 app.post("/api/v1/signup", async (req, res) => {
   // add zod validation , hash the password
   const { username, password } = req.body;
@@ -36,7 +33,7 @@ app.post("/api/v1/signin", async (req, res) => {
     const existingUser = await UserModel.findOne({ username, password });
 
     if (existingUser) {
-      const token = jwt.sign({ id: existingUser._id }, JWT_SECRET);
+      const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET as string);
       res.json({
         message: "signed in successfully",
         token,

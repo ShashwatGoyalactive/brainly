@@ -2,12 +2,9 @@ import { NextFunction, Request, Response  } from "express";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 
-const JWT_SECRET = "randomharkiratIlovekiara";
-
-
 export const userMiddleware = (req : Request, res : Response, next : NextFunction) => {
     const token  = req.headers["authorization"];   
-        const decoded = jwt.verify(token as string , JWT_SECRET) as JwtPayload | null;
+        const decoded = jwt.verify(token as string , process.env.JWT_SECRET as string) as JwtPayload | null;
         if(decoded){
             req.userId = decoded.id ;
             next();
