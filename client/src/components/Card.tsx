@@ -1,6 +1,6 @@
 import { DeleteIcon } from "../icons/DeleteIcon";
 import { PlayIcon } from "../icons/PlayIcon";
-import { TweetIcon } from "../icons/TweetIcon";
+import { CrossIcon } from "../icons/CrossIcon";
 import { ShareIcon } from "./../icons/ShareIcon";
 
 interface CardProps {
@@ -12,7 +12,7 @@ interface CardProps {
 
 const IconType = {
   youtube: <PlayIcon />,
-  twitter: <TweetIcon />,
+  twitter: <CrossIcon />,
 };
 
 export const Card = (props: CardProps) => {
