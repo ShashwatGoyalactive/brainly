@@ -2,11 +2,13 @@ import { useRef, useState } from "react";
 import { Button, Input } from "../components/Index";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function Signup() {
   const [loading, setLoading] = useState(false);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   async function singnup() {
     setLoading(true);
@@ -27,6 +29,7 @@ export function Signup() {
       alert("signup successful");
       usernameRef.current!.value = "";
       passwordRef.current!.value = "";
+      navigate("/signin");
     } catch (err) {
       console.log(err);
     }
@@ -36,17 +39,15 @@ export function Signup() {
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-slate-200 min-w-48 ">
       <div className="bg-white rounded border border-slate-200 flex flex-col p-4 justify-center">
-        <label htmlFor="email">
-          Email
+        <label htmlFor="username">
           <Input
-            placeholder="email"
-            id="email"
-            type="email"
+            placeholder="username"
+            id="username"
+            type="text"
             reference={usernameRef}
           />
         </label>
         <label htmlFor="password">
-          Password
           <Input
             placeholder="password"
             id="password"
@@ -59,6 +60,15 @@ export function Signup() {
             onClick={singnup}
             variant="primary"
             text="signup"
+            fullWidth={true}
+            loading={loading}
+          />
+          <span>or</span>
+
+          <Button
+            onClick={() => navigate("/signin")}
+            variant="primary"
+            text="signin"
             fullWidth={true}
             loading={loading}
           />

@@ -8,6 +8,7 @@ import {
 interface CardProps {
   title: string;
   link: string;
+  cardKey? : string | undefined;
   type: "twitter" | "youtube";
   tags?: string[];
 }
@@ -19,7 +20,7 @@ const IconType = {
 
 export const Card = (props: CardProps) => {
   return (
-    <div>
+    <div  key={props.cardKey}>
       <div
         className={` p-4 bg-white  rounded-md border border-slate-100   outline-slate-200 min-h-48 max-w-72 hover:transform hover:scale-105 transition-all duration-150`}
       >
@@ -39,28 +40,25 @@ export const Card = (props: CardProps) => {
           </div>
         </div>
 
-        {props.type === "youtube" ? (
-          <iframe
-            className="w-full pt-4"
-            src={props.link.replace("watch", "embed").replace("?v=", "/")}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
-        ) : (
-          <blockquote className="twitter-tweet">
-            <p lang="en" dir="ltr">
-              I’m launching a Fellowship{" "}
-              <a href="https://t.co/4pkaJHoLNE">pic.twitter.com/4pkaJHoLNE</a>
-            </p>
-            &mdash; Harkirat Singh (@kirat_tw){" "}
-            <a href="https://twitter.com/kirat_tw/status/1929805164963061811?ref_src=twsrc%5Etfw">
-              June 3, 2025
-            </a>
-          </blockquote>
-        )}
+        <div className="pt-4">
+          {props.type === "youtube" && (
+            <iframe
+              className="w-full"
+              src={props.link.replace("watch", "embed").replace("?v=", "/")}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          )}
+
+          {props.type === "twitter" && (
+            <blockquote className="twitter-tweet">
+              <a href={props.link.replace("x.com", "twitter.com")}></a>
+            </blockquote>
+          )}
+        </div>
       </div>
 
       {/* TODO : Implement the tag rendering logic here  */}

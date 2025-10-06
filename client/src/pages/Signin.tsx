@@ -2,11 +2,13 @@ import { Button, Input } from "../components/Index";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export function Signin() {
   const [loading, setLoading] = useState(false);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   async function signin() {
     setLoading(true);
@@ -27,6 +29,9 @@ export function Signin() {
 
       if (user) {
         alert("signin successful");
+        localStorage.setItem("token", user.data.token);
+        axios.defaults.headers.common["Authorization"] = `${user.data.token}`;
+        navigate("/dashboard");
       } else {
         alert("signin failed");
       }
@@ -38,17 +43,16 @@ export function Signin() {
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-slate-200 min-w-48 ">
       <div className="bg-white rounded border border-slate-200 flex flex-col p-4 justify-center">
-        <label htmlFor="email">
-          Email
+        <label htmlFor="username">
+          
           <Input
+            placeholder="username"
+            id="username"
+            type="text"
             reference={usernameRef}
-            placeholder="email"
-            id="email"
-            type="email"
           />
         </label>
         <label htmlFor="password">
-          Password
           <Input
             reference={passwordRef}
             placeholder="password"
@@ -61,6 +65,16 @@ export function Signin() {
             onClick={signin}
             variant="primary"
             text="signin"
+            fullWidth={true}
+            loading={loading}
+          />
+
+          <span>or</span>
+
+          <Button
+            onClick={() => navigate("/signup")}
+            variant="primary"
+            text="signup"
             fullWidth={true}
             loading={loading}
           />

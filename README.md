@@ -99,6 +99,31 @@ The client and server run independently. The client communicates with the server
 - `npm run start` - Start server (nodemon)
 - `npm run dev` - Build and start server
 
+
 ## License
 
 This project is licensed under the ISC License.
+
+---
+
+## How the App Functions
+
+The Brainly app is designed as a fullstack solution with a clear separation between frontend and backend:
+
+- **Frontend (Client):**
+  - Built with React and TypeScript, the client provides an interactive user interface for users to create, view, and manage content.
+  - Components such as cards, modals, and sidebars allow users to interact with the app efficiently.
+  - The client communicates with the backend using HTTP requests (via Axios) to fetch, create, update, or delete data.
+
+- **Backend (Server):**
+  - Built with Express and Mongoose, the server exposes RESTful API endpoints for all core functionalities.
+  - Handles user authentication, data validation, and business logic.
+  - Stores and retrieves data from a MongoDB database, ensuring persistence and scalability.
+
+**Typical Workflow:**
+1. A user interacts with the frontend (e.g., creates a new card or content).
+2. The frontend sends a request to the backend API.
+3. The backend processes the request, interacts with the database, and returns a response.
+4. The frontend updates the UI based on the server response.
+
+This architecture ensures a smooth user experience and a maintainable codebase, with clear responsibilities for each part of the stack.
