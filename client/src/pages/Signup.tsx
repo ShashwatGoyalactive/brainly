@@ -12,7 +12,7 @@ return (
             <Input placeholder="password" id="password" type="password" />
             </label>
             <div className="flex justify-center pt-4">
-            <Button variant="primary" text="signin" fullWidth={true} loading={true}/>
+            <Button variant="primary" text="signup" fullWidth={true} loading={true}/>
             </div>
 
         </div>
