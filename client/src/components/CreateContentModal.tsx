@@ -23,8 +23,8 @@ export const CreateContentModal = ({
                   <CrossIcon/>
                 </div>
                 <div>
-                  <Input placeholder={"Title"} id="title" />
-                  <Input placeholder={"Link"} id="link" />
+                  <Input placeholder={"Title"} id="title" type="text"/>
+                  <Input placeholder={"Link"} id="link" type="text"/>
                 </div>
                 <div className="flex justify-center">
                   <Button
