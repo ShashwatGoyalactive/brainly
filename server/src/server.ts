@@ -5,9 +5,13 @@ import jwt from "jsonwebtoken";
 import { ContentModel, LinkModel, UserModel } from "./db";
 import { userMiddleware } from "./middleware";
 import { random } from "./utility";
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+}));
 
 app.post("/api/v1/signup", async (req, res) => {
   // add zod validation , hash the password
@@ -33,7 +37,7 @@ app.post("/api/v1/signin", async (req, res) => {
     const existingUser = await UserModel.findOne({ username, password });
 
     if (existingUser) {
-      const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET as string);
+      const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET as string );
       res.json({
         message: "signed in successfully",
         token,
